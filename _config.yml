@@ -3,8 +3,8 @@
 # Site settings
 title: "Top Lane Factors to Win Analysis"
 description: "An analysis of the critical factors leading to success in the top lane role in League of Legends esports."
-url: "https://ryansen.github.io/top-lane-analysis" # Update with your actual GitHub Pages URL
-baseurl: "" # Leave blank for the root of your GitHub Pages site
+url: "https://ryansen.github.io"  # User-level GitHub Pages URL without trailing slash
+baseurl: "/top-lane-analysis"     # Repository name for baseurl
 
 # Author information
 author:
@@ -23,26 +23,11 @@ plugins:
 markdown: kramdown
 highlighter: rouge
 
-# Optional: Social links (update with your handles)
-social_links:
-  twitter: "your_twitter_handle"
-  github: "your_github_username"
-  linkedin: "your_linkedin_profile_url"
-
-# Optional: Navigation menu
-navigation:
-  - name: "Home"
-    link: "/"
-  - name: "About"
-    link: "/about/"
-  - name: "Contact"
-    link: "/contact/"
-
 # Additional configurations for Jekyll
 exclude:
-  - "README.md"
   - "Gemfile"
   - "Gemfile.lock"
 
 # Build settings for GitHub Pages
-remote_theme: "pages-themes/minimal@v0.2.0" # Example of a remote theme, replace with your choice
+# Remove remote_theme if using theme in the config
+# remote_theme: "pages-themes/minimal@v0.2.0"
