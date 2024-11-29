@@ -3,13 +3,13 @@
 # Site settings
 title: "Top Lane Factors to Win Analysis"
 description: "An analysis of the critical factors leading to success in the top lane role in League of Legends esports."
-url: "https://yourusername.github.io/top-lane-analysis" # Update with your actual GitHub Pages URL
+url: "https://ryansen.github.io/top-lane-analysis" # Update with your actual GitHub Pages URL
 baseurl: "" # Leave blank for the root of your GitHub Pages site
 
 # Author information
 author:
-  name: "Your Name"
-  email: "your.email@example.com"
+  name: "Ryan Lee"
+  email: "ryanparkerlee2128@gmail.com"
 
 # Theme settings (GitHub Pages themes, e.g., Minima)
 theme: minima
