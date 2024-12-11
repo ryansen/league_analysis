@@ -1,5 +1,4 @@
 ---
-title: "Top Laner's Individual Performance to Win Analysis"
 ---
 
 #"Top Laner's Individual Performance to Win Analysis"
