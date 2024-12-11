@@ -1,7 +1,7 @@
 # _config.yml
 
 # Site settings
-title: "Top Lane Factors to Win Analysis"
+title: "Top Laner's Individual Performance to Win Analysis"
 description: "An analysis of the critical factors leading to success in the top lane role in League of Legends esports."
 url: "https://ryansen.github.io"  # User-level GitHub Pages URL without trailing slash
 baseurl: "/top-lane-analysis"     # Repository name for baseurl
@@ -29,7 +29,3 @@ highlighter: rouge
 exclude:
   - "Gemfile"
   - "Gemfile.lock"
-
-# Build settings for GitHub Pages
-# Remove remote_theme if using theme in the config
-# remote_theme: "pages-themes/minimal@v0.2.0"
