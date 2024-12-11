@@ -1,5 +1,3 @@
----
----
 
 # Top Laner's Individual Performance to Win Analysis
 
