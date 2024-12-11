@@ -329,7 +329,7 @@ The features used in this decision tree model are as follows:
 Below is an interactive confusion matrix that visualizes the final model's performance:
 
 <iframe
-  src="confusion_matrix.html" 
+  src="assets/confusion_matrix.html" 
   width="800"
   height="600"
   frameborder="0"
@@ -378,7 +378,7 @@ The final model outperforms the baseline by leveraging features that reflect the
 Below is the distribution of the differences in accuracy between the Blue and Red sides, generated through the permutation test. The red dashed line indicates the observed difference.
 
 <iframe
-  src="diff_acc.html" 
+  src="assets/diff_acc.html" 
   width="800"
   height="600"
   frameborder="0"
