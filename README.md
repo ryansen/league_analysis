@@ -8,5 +8,5 @@ An analysis of the critical factors for success in the top lane role of League o
 ---
 
 By Ryan Lee
-a
+
 ## Introduction
