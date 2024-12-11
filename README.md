@@ -72,3 +72,47 @@ I also filtered the data to only keep individual Top Laner's stats. Rows that co
 | ESPORTSTMNT01_2690219 | True     | False            |        652   |         1484   |      0.315704 | Red    |       13289   |       2 |        2 |         6 | 670.7285 | 9.6783 |
 | ESPORTSTMNT01_2690227 | True     | False            |         85   |          904   |      0.192858 | Blue   |        9771   |       3 |        2 |         7 | 395.3550 | 9.2495 |
 
+### Univariate Analysis
+
+<iframe
+  src="assets/xp_diff_dist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
+### Bivariate Analysis
+
+<iframe
+  src="assets/earned_gold_vs_result.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+<iframe
+  src="assets/dpm_vs_gold.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
+### Interesting Aggregates
+
+## Assessment of Missingness
+
+### NMAR Analysis
+
+### Missingness Dependency
+
+## Hypothesis Testing
+
+## Framing a Prediction Problem
+
+## Baseline Model
+
+## Final Model
+
+## Fairness Analysis
