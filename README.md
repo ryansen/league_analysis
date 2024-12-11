@@ -216,6 +216,128 @@ By leveraging a **Decision Tree Classifier**, we can evaluate the significance o
 
 ## Baseline Model
 
+### Model Description
+
+#### Features in the Model
+The features used in this decision tree model are as follows:
+
+1. **Quantitative Features** (6):
+   - `firstbloodkill`: A binary variable indicating whether the player got the first blood kill.
+   - `golddiffat15`: The gold difference at 15 minutes, indicating the player's early-game performance.
+   - `damageshare`: The proportion of the total team damage dealt by the player.
+   - `earnedgold`: The total gold earned by the player in the game.
+   - `dpm` (Damage Per Minute): The amount of damage dealt by the player per minute.
+   - `cspm` (Creep Score Per Minute): The player's creep score per minute.
+
+2. **Nominal Features** (0): None in this specific model, as no categorical variables like "side" were included.
+
+3. **Ordinal Features** (0): None in this specific model, as the features are either continuous or binary.
+
+---
+
+#### Preprocessing and Encodings
+- **Scaling**: All quantitative features were scaled using `StandardScaler` to normalize the data and ensure that the decision tree's splits are not biased by differing feature magnitudes.
+- **No Encoding Needed**: Since all features are quantitative, no encoding for categorical variables was performed.
+
+---
+
+#### Model Performance
+- **Training Accuracy**: The model achieved an accuracy of **69%** on the training set. 
+- **Test Performance**: The model achieved an accuracy of **69%** on the test set. 
+
+---
+
+#### Assessment of Model Quality
+1. **Strengths**:
+   - The model captures early-game and individual performance metrics that are highly relevant for predicting a player's contribution to the game's outcome.
+   - Decision trees are interpretable, making it easy to understand how features contribute to the model's predictions.
+
+2. **Weaknesses**:
+   - The training accuracy of **69%** suggests that the model may not capture all patterns in the data and could benefit from additional features or more complex modeling approaches (e.g., random forests or gradient boosting).
+   - The use of a depth-limited decision tree (`max_depth=2`) might lead to underfitting, as the tree may not be complex enough to capture all important splits.
+
+3. **Conclusion**:
+   - While the model provides insights into feature importance and relationships, the performance indicates that there is room for improvement. Testing with a more flexible tree depth or using ensemble methods could enhance its predictive capability.
+   - Additional features, such as `side` or other game statistics, could further improve the model's performance.
+
+---
+
+### Next Steps
+- Evaluate the model's performance on the test set and compute metrics such as precision, recall, and F1-score.
+- Experiment with hyperparameter tuning (e.g., increasing `max_depth` or using ensemble methods like Random Forest).
+- Include nominal or ordinal features such as the `side` of the player and encode them appropriately to enrich the model.
+
 ## Final Model
+
+### Model Description and Feature Selection
+
+#### Features Added
+1. **`earnedgold`** (Quantile Transformed):
+   - **Reason for Inclusion**: This feature represents the total gold earned by a player, which is a direct indicator of resource efficiency and contributions to the game. Transforming it using a quantile transformer ensures that its skewed distribution is normalized, making it more comparable across players.
+   - **Impact on Model**: Helps the model better evaluate resource accumulation differences among players.
+
+2. **`damageshare`** (Binarized):
+   - **Reason for Inclusion**: Damage share reflects how much of the team's total damage the player contributes. Binarizing it around a threshold of 0.25 allows the model to distinguish high contributors from average or below-average contributors.
+   - **Impact on Model**: Adds clarity to the role of significant damage contributors without noise from smaller variations.
+
+3. **`side`** (One-Hot Encoded):
+   - **Reason for Inclusion**: This categorical variable represents whether the player was on the Blue or Red side of the map. The side influences strategic advantages, such as vision placement and early-game pathing.
+   - **Impact on Model**: Helps capture map-based discrepancies that can affect performance.
+
+---
+
+### Modeling Algorithm and Hyperparameter Selection
+1. **Modeling Algorithm**:
+   - A **Decision Tree Classifier** was chosen for its interpretability and ability to handle mixed feature types. This model structure is ideal for identifying key splits in performance metrics that correlate with game outcomes.
+
+2. **Hyperparameter Selection**:
+   - The following hyperparameters were tuned using **GridSearchCV**:
+     - `max_depth`: Controls the depth of the tree to prevent overfitting.
+     - `min_samples_split`: Ensures that splits are meaningful by requiring a minimum number of samples.
+     - `criterion`: Evaluates splits using either Gini impurity or entropy.
+
+3. **Best Hyperparameters**:
+   - `max_depth`: `5`
+   - `min_samples_split`: `20`
+   - `criterion`: `entropy`
+
+4. **Selection Method**:
+   - **GridSearchCV** with 5-fold cross-validation was employed to evaluate combinations of hyperparameters. This method ensures that the model generalizes well to unseen data by testing on multiple folds.
+
+---
+
+### Model Performance
+
+#### Baseline Model
+- The baseline model used a limited feature set and a fixed depth decision tree (`max_depth=2`), achieving a training accuracy of **69%**.
+  
+#### Final Model
+- The final model incorporates additional features (`earnedgold`, `damageshare`, `side`) and uses hyperparameter tuning for optimization.
+- **Performance Metrics**:
+  - **Training Accuracy**: **82%**
+  - **Test Accuracy**: **78%**
+  - **Precision Score**: **0.75**
+
+#### Improvement Over Baseline
+- The final model shows a significant improvement in accuracy and precision over the baseline model due to:
+  - Inclusion of relevant features derived from the game's data-generating process.
+  - Hyperparameter tuning to optimize splits and prevent overfitting.
+
+---
+
+### Confusion Matrix
+Below is an interactive confusion matrix that visualizes the final model's performance:
+
+<iframe
+  src="confusion_matrix.html" 
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+---
+
+### Conclusion
+The final model outperforms the baseline by leveraging features that reflect the underlying dynamics of individual performance in games. It captures early-game metrics (`golddiffat15`), team contributions (`damageshare`), and structural factors (`side`) to make more accurate predictions. The inclusion of feature transformations and hyperparameter optimization ensures the model is both interpretable and robust.
 
 ## Fairness Analysis
