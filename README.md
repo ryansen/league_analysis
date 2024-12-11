@@ -52,6 +52,23 @@ This data set of pro-player matches contains necessary post-game data combined w
 
 - **`cspm`**: Creep score per minute achieved by the player.
 
+- **`gamelength`**: The length in time of each game that is played.
+
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
+
+First I set the index to 'gameid', 
+
+I kept the relevant columns to a Top Laner's stats that measure their individual performance and other relevant columns on the game state:
+`result`, `firstbloodkill`, `xpdiffat15`, `golddiffat15`, `damageshare`, `side`, `earnedgold`, `kills`, `deaths`, `assists`, `dpm`, `cspm`, `gamelength`
+
+I also filtered the data to only keep individual Top Laner's stats. Rows that contained missing data were removed based on a `datacompleteness` column that was provided in the data set because there would be up to 5 missing cells per row with missing data. Furthermore, `gamelength` column was converted to datetime objects. 
+
+| gameid              | result   | firstbloodkill   |   xpdiffat15 |   golddiffat15 |   damageshare | side   |   earnedgold |   kills |   deaths |   assists |      dpm |   cspm |
+|:--------------------|:---------|:-----------------|-------------:|---------------:|--------------:|:-------|-------------:|--------:|---------:|----------:|---------:|-------:|
+| ESPORTSTMNT01_2690210 | False    | False            |        345   |          391   |      0.278784 | Blue   |        7164   |       2 |        3 |         2 | 552.2942 | 8.0911 |
+| ESPORTSTMNT01_2690210 | True     | False            |       -345   |         -391   |      0.218428 | Red    |        6231   |       1 |        1 |        12 | 611.3835 | 8.0210 |
+| ESPORTSTMNT01_2690219 | False    | False            |       -652   |        -1484   |      0.159184 | Blue   |        6488   |       0 |        5 |         2 | 269.1769 | 6.9536 |
+| ESPORTSTMNT01_2690219 | True     | False            |        652   |         1484   |      0.315704 | Red    |       13289   |       2 |        2 |         6 | 670.7285 | 9.6783 |
+| ESPORTSTMNT01_2690227 | True     | False            |         85   |          904   |      0.192858 | Blue   |        9771   |       3 |        2 |         7 | 395.3550 | 9.2495 |
 
