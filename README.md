@@ -341,3 +341,47 @@ Below is an interactive confusion matrix that visualizes the final model's perfo
 The final model outperforms the baseline by leveraging features that reflect the underlying dynamics of individual performance in games. It captures early-game metrics (`golddiffat15`), team contributions (`damageshare`), and structural factors (`side`) to make more accurate predictions. The inclusion of feature transformations and hyperparameter optimization ensures the model is both interpretable and robust.
 
 ## Fairness Analysis
+
+### Groups and Evaluation Metric
+- **Group X**: Players on the Blue side.
+- **Group Y**: Players on the Red side.
+- **Evaluation Metric**: Accuracy, calculated as the proportion of correct predictions (`prediction`) compared to actual results (`result`) for each side.
+
+### Hypotheses
+- **Null Hypothesis (H₀)**: There is no difference in prediction accuracy between the Blue side and the Red side; any observed differences are due to random chance.
+- **Alternative Hypothesis (Hₐ)**: There is a difference in prediction accuracy between the Blue side and the Red side; the observed differences are not due to random chance.
+
+### Test Statistic and Significance Level
+- **Test Statistic**: The difference in accuracy (Blue side minus Red side).
+- **Significance Level (α)**: 0.05
+
+### Permutation Test Procedure
+1. Shuffle the `side` column while keeping `result` and `prediction` fixed.
+2. Compute the accuracy for the shuffled groups and calculate the difference in accuracy.
+3. Repeat this process 500 times to generate a distribution of differences under the null hypothesis.
+4. Compare the observed difference to this distribution to calculate the p-value.
+
+### Results
+- **Observed Difference**: `obs` (replace with actual observed value).
+- **p-value**: `p_value` (replace with calculated p-value).
+  - If `p_value < α` (0.05), we reject the null hypothesis and conclude that there is a significant difference in prediction accuracy between the sides.
+
+### Conclusion
+- If the p-value indicates significance:
+  - The results suggest a difference in prediction accuracy between the Blue and Red sides, implying a possible bias in the model’s performance.
+- If the p-value is not significant:
+  - We fail to reject the null hypothesis, suggesting no significant accuracy disparity between the sides.
+
+---
+
+### Visualization
+Below is the distribution of the differences in accuracy between the Blue and Red sides, generated through the permutation test. The red dashed line indicates the observed difference.
+
+<iframe
+  src="diff_acc.html" 
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+This visualization helps us understand how unusual the observed difference is under the null hypothesis, providing a graphical representation of the fairness analysis.
