@@ -121,11 +121,98 @@ Oftentimes a first blood by a Top Laner is a 'solo kill' (no teammates are prese
 
 ### NMAR Analysis
 
+I believe that the 'dpm' column is NMAR there is two missing values. This is due to the fact that is the 'damage per minute' and it is possible that damage dealt by a player could not be calculated in the case of a pro match where there is tech issues and the game was not able to properly start. There would be no damage to calculate or time to divide that damage by. 
+
 ### Missingness Dependency
+
+This part of the analysis focuses on testing the missingness of `'golddiffat15'` based on other columns. The columns being tested for whether `'golddiffat15'` is dependent on them being missing are `'datacompleteness'` and `'gamelength'`.
+
+I will use **Total Variance Distance (TVD)** as the test statistic, and the significance level will be set at 0.01.
+
+#### Hypotheses
+- **Null Hypothesis**: The distribution of missing `'golddiffat15'` values is independent of `'datacompleteness'` and `'gamelength'`.
+- **Alternative Hypothesis**: The distribution of missing `'golddiffat15'` values depends on `'datacompleteness'` and `'gamelength'`.
+
+To test the Missingness at Random (MAR), I conducted a permutation test by shuffling `'gamelength'` to determine if the missingness of `'golddiffat15'` is dependent on it, repeating this process 500 times. I then calculated the proportion of simulated TVDs greater than or equal to the observed TVD to obtain the p-value. The resulting p-value was `0.0`, meaning that we reject the null hypothesis at a 0.01 significance level.
+
+Next, I performed the same procedure with `'datacompleteness'` and obtained a p-value of `1.0`. This means we fail to reject the null hypothesis at a 0.01 significance level, indicating that the missingness of `'golddiffat15'` is not dependent on the `'datacompleteness'` column.
 
 ## Hypothesis Testing
 
+### Hypothesis Testing Results
+
+In this analysis, we tested the relationship between the game outcome (`result`) and three factors: `'xpdiffat15'`, `'kills'`, and `'damageshare'`. The goal was to determine whether these factors significantly influence the outcome of a game using a permutation test.
+
+#### Hypotheses
+
+- **Null Hypothesis (H₀)**: There is no association between the factor and the game outcome (`result`), meaning any observed differences are due to random chance.
+- **Alternative Hypothesis (Hₐ)**: There is an association between the factor and the game outcome (`result`), meaning the observed differences are not solely due to random chance.
+
+#### Test Statistic and Significance Level
+
+- **Test Statistic**: The observed difference in means of the factor values between games that resulted in a win (`result=True`) and games that resulted in a loss (`result=False`).
+- **Significance Level (α)**: 0.05
+
+#### Results
+
+1. **Factor: `'xpdiffat15'`**
+   - **Observed Difference**: `451.96`
+   - **p-value**: `0.0`
+   - **Conclusion**: The p-value is less than 0.05, so we reject the null hypothesis. This suggests that `'xpdiffat15'` is likely associated with the game outcome.
+
+2. **Factor: `'kills'`**
+   - **Observed Difference**: `1.97`
+   - **p-value**: `0.0`
+   - **Conclusion**: The p-value is less than 0.05, so we reject the null hypothesis. This suggests that `'kills'` is likely associated with the game outcome.
+
+3. **Factor: `'damageshare'`**
+   - **Observed Difference**: `-0.0058`
+   - **p-value**: `1.0`
+   - **Conclusion**: The p-value is greater than 0.05, so we fail to reject the null hypothesis. This suggests that `'damageshare'` is not significantly associated with the game outcome.
+
+#### Justification of Methodology
+
+- **Permutation Test**: This method was chosen as it does not rely on assumptions about the distribution of the data, making it suitable for the dataset.
+- **Significance Level (0.05)**: A commonly used threshold in statistical testing, which balances the risk of Type I and Type II errors.
+- **Test Statistic**: The difference in means is an intuitive measure of the association between the factor and the outcome.
+
+#### Limitations
+
+- These tests do not prove causation, as they are based on observed data and not randomized controlled experiments.
+- The conclusions are based on the significance level and the p-value, which are inherently probabilistic measures.
+
+#### Visualization
+
+The empirical distribution of differences obtained from the permutations for `'xpdiffat15'` showed that the observed difference is far in the tail, consistent with a low p-value. A similar pattern was observed for `'kills'`, while `'damageshare'` demonstrated no such pattern, aligning with the high p-value.
+
+These findings highlight that `'xpdiffat15'` and `'kills'` are important factors to consider in understanding game outcomes, while `'damageshare'` appears to have a weaker or negligible association.
+
 ## Framing a Prediction Problem
+
+The goal of this analysis is to predict whether a Top Laner will win their game based on their individual post-game performance stats. This is a **binary classification** problem, as the target variable (`result`) has two possible outcomes: `True` (win) or `False` (loss).
+
+#### Response Variable
+- **Response Variable**: `result` (whether a Top Laner wins or loses their game).
+- **Reason for Choosing `result`**: This variable directly reflects the outcome of the game, which aligns with the objective of understanding the relationship between individual performance and winning. By focusing on this variable, we can evaluate the importance of Top Lane stats in determining game success.
+
+#### Features Used
+We are using **post-game stats** to train the model, including:
+- **`golddiffat15`**: Represents the gold difference at 15 minutes. This is a critical indicator of how much advantage the Top Laner was able to achieve in the early game, typically in a 1v1 scenario.
+- Other features such as `kills`, `deaths`, `assists`, and `damageshare`, which collectively capture individual contributions to the game's outcome.
+
+#### Justification for Feature Selection
+All features used in the model are **available at the time of prediction** as they are derived from post-game stats. The goal is to evaluate whether these stats "matter" in determining the Top Laner's ability to contribute to a win.
+
+#### Evaluation Metric
+- **Metric Used**: Accuracy
+  - **Reason**: Accuracy is a straightforward metric that measures the proportion of correct predictions out of all predictions. Since the dataset is not heavily imbalanced (i.e., both wins and losses are reasonably represented), accuracy is a reliable metric for this problem.
+  - **Other Metrics Considered**: Metrics like F1-score were considered, but since the primary goal is to assess the overall correctness of the model in predicting wins or losses, accuracy was deemed most suitable.
+
+#### Context and Limitations
+- This analysis focuses on **post-game data**, meaning the stats are only available after the game is completed. The goal is not to predict the outcome in real-time but rather to understand how individual Top Lane performance contributes to winning.
+- Metrics like `golddiffat15` are particularly valuable as they capture early-game performance in a largely isolated 1v1 context before teamplay dynamics take over. This allows for a focused analysis of the Top Laner's individual impact.
+
+By leveraging a **Decision Tree Classifier**, we can evaluate the significance of individual stats in determining game outcomes and interpret the model to identify the most influential factors.
 
 ## Baseline Model
 
