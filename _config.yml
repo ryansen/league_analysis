@@ -12,7 +12,9 @@ author:
   email: "ryanparkerlee2128@gmail.com"
 
 # Theme settings (GitHub Pages themes, e.g., Minima)
-theme: minima
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
 
 # Plugins (if needed for Jekyll/GitHub Pages)
 plugins:
