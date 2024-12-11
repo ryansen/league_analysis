@@ -81,6 +81,7 @@ I also filtered the data to only keep individual Top Laner's stats. Rows that co
   frameborder="0"
 ></iframe>
 
+This plot describes the distribution of XP Difference at 15 minutes among Top Laners. It displays a normal distribution as it is symmetric. 
 
 ### Bivariate Analysis
 
@@ -91,6 +92,9 @@ I also filtered the data to only keep individual Top Laner's stats. Rows that co
   frameborder="0"
 ></iframe>
 
+This is a box plot that shows the distribution of 'earned gold 'by whether a game was won or not. This plot indicates that 'earned gold' by a top laner is higher when they win a match as the spread is higher. 
+
+
 <iframe
   src="assets/dpm_vs_gold.html"
   width="800"
@@ -98,8 +102,20 @@ I also filtered the data to only keep individual Top Laner's stats. Rows that co
   frameborder="0"
 ></iframe>
 
+This scatter plot shows the relation between 'damage per minute' and 'earned gold' which appears to be a linear correlation.
 
 ### Interesting Aggregates
+
+| result   | golddiffat15 (False) | golddiffat15 (True) | xpdiffat15 (False) | xpdiffat15 (True) |
+|:---------|----------------------:|--------------------:|-------------------:|------------------:|
+| False    |          -381.674055 |         478.299539 |         -249.027279 |        127.038402 |
+| True     |           248.728519 |        1103.597793 |          190.440831 |        569.063190 |
+
+
+This pivot table summarizes the mean values of 'golddiffat15' and 'xpdiffat15' ,
+grouped by two categorical variables: 'result' (win/loss) and 'firstbloodkill' (whether the first blood kill occurred). This table implies that 'golddiffat15' and 'xpdiffat15' greatly increase when a Top Laner gets the first kill of the match. 
+
+Oftentimes a first blood by a Top Laner is a 'solo kill' (no teammates are present) meaning that a first blood is a good indicator of a Top Laner's skill over the enemy Top Laner. 
 
 ## Assessment of Missingness
 
